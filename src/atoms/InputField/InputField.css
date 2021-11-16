@@ -1,0 +1,22 @@
+input{
+    border: solid 2px #ccc;
+    height: 45px;
+    padding-left: 10px;
+    margin: 0px 5px 5px 0;
+    border-radius: 4px;
+}
+
+
+.w-100-p{
+width: 100%;
+}
+.w-350{
+    width:400px;
+}
+.inputFieldOrgDetail{
+    display:inline-block;
+    width: 100%;
+    padding: 5px 8px;
+}
+.inputFieldOrgDetailLabel{
+color: #a2a4a6;}
