@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-solution
+  labels:
+    app: hello-solution
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-solution
+  template:
+    metadata:
+      labels:
+        app: hello-solution
+    spec:
+      containers:
+        - name: hello-solution
+          image: aicollaboration/hello-solution:<VERSION>
+          imagePullPolicy: Always
+          env:
+          - name: PYTHONUNBUFFERED
+            value: "0"
+          ports:
+            - containerPort: 5000
+          resources:
+            limits:
+              memory: "2048Mi"
+              cpu: "500m"
+      restartPolicy: Always
