@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: hello-solution-aicollaboration.io
+  name: aicollaboration.net
   annotations:
     kubernetes.io/ingress.class: "nginx"
     cert-manager.io/cluster-issuer: letsencrypt
@@ -12,10 +12,10 @@ spec:
     - aiproduct.io
     secretName: tls-latest-aiproduct.io
   rules:
-   - host: hello-solution.aiproduct.io
-     http:
+  - host: aiproduct.io
+    http:
       paths:
       - path: /
         backend:
-          serviceName: hello-solution
+          serviceName: frontend
           servicePort: 80
