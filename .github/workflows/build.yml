@@ -26,6 +26,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
       - name: Login to docker
         uses: docker/login-action@v1
         with:
@@ -37,10 +42,13 @@ jobs:
         with:
           push: true
           tags: aicollaboration/hello-solution:latest
-          
-      - name: deploy to k8s
-        run: |
-          CI_COMMIT_SHA=$(git log -1 --format=%H)
-          ssh -tt root@75.119.150.249 "CI_COMMIT_SHA_k8S=$CI_COMMIT_SHA"
-          helm upgrade --install hello-solution devops/helm -f devops/helm/values.yaml --set tag=$CI_COMMIT_SHA_k8S
 
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.4.0
+
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.2.1
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
