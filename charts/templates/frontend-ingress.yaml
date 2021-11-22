@@ -17,5 +17,5 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: frontend
+          serviceName: <solution-repo>
           servicePort: 80

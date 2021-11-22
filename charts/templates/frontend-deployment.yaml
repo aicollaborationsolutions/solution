@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: <solution-repo>
 spec:
-  replicas: {{ .Values.frontend.replicaCount }}
+  replicas: {{ .Values.<solution-repo>.replicaCount }}
   selector:
     matchLabels:
-      app: frontend
+      app: <solution-repo>
   template:
     metadata:
       labels:
-        app: frontend
+        app: <solution-repo>
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-        - name: frontend
-          image: "{{ .Values.frontend.image }}:{{ .Values.tag }}"
+        - name: <solution-repo>
+          image: "{{ .Values.<solution-repo>.image }}:{{ .Values.tag }}"
           ports:
           - containerPort: 80
 
