@@ -39,3 +39,12 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: ghcr.io/aicollaborationsolutions/solution:latest
+    
+      - name: Set kubernetes secrets
+        uses: Azure/k8s-set-context@v1
+        with:
+          method: service-account
+          k8s-url: https://aicollaboration-dns-0cecd3b6.hcp.germanywestcentral.azmk8s.io:443
+          k8s-secret: ${{ secrets.K8S_TOKEN }}
+    
+            
