@@ -39,12 +39,24 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: ghcr.io/aicollaborationsolutions/solution:latest
+
+    
+      - name: Get AKS credentials
+        env:
+          CLUSTER_RESOURCE_GROUP_NAME: ${{ secrets.CLUSTER_RESOURCE_GROUP_NAME }}
+          CLUSTER_NAME: ${{ secrets.CLUSTER_NAME }}
+        run: |
+          az aks get-credentials \
+            --resource-group $CLUSTER_RESOURCE_GROUP_NAME \
+            --name $CLUSTER_NAME \
+            --overwrite-existing
     
       - name: Set kubernetes secrets
-        uses: Azure/k8s-set-context@v1
+        uses: azure/k8s-set-context@v2
         with:
-          method: service-account
-          k8s-url: https://aicollaboration-dns-0cecd3b6.hcp.germanywestcentral.azmk8s.io:443
-          k8s-secret: ${{ secrets.K8S_TOKEN }}
-    
-            
+          method: kubeconfig
+          kubeconfig: ${{ secrets.AKS_DEV_KUBECONFIG }}
+
+      - name: k8s with helm
+        run: |
+          helm list
