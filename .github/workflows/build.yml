@@ -46,6 +46,12 @@ jobs:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBECONFIG }}
 
-      - name: k8s with helm
+      - name: k8s 
         run: |
           helm list
+          kubectl apply -f deployment-solution/manifests/api-ingress-solution.yml
+          kubectl apply -f deployment-solution/manifests/deployment-solution.yml
+          kubectl apply -f deployment-solution/manifests/service-solution.yml
+          kubectl get pods
+          kubectl get svc
+          kubectl get ing 
