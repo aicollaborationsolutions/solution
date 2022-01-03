@@ -38,7 +38,16 @@ jobs:
         with:
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: ghcr.io/aicollaborationsolutions/solution:latest
+          tags: ghcr.io/aicollaborationsolutions/solution:${{ github.sha }}
+          
+      - name: Shell
+        run: |
+          pwd
+          ls -ltr
+          sed -i "s/<solution-repo>/${GITHUB_REPOSITORY#*/}/g" api-ingress-solution.yml
+          sed -i "s/<solution-repo>/${GITHUB_REPOSITORY#*/}/g" deployment-solution.yml
+          sed -i "s/<solution-repo>/${GITHUB_REPOSITORY#*/}/g" service-solution.yml
+          sed -i "s/<VERSION>/${{ github.sha }}/g" deployment-solution.yml
     
       - name: Set kubernetes secrets
         uses: azure/k8s-set-context@v2
@@ -49,9 +58,9 @@ jobs:
       - name: k8s 
         run: |
           helm list
-          kubectl apply -f deployment-solution/manifests/api-ingress-solution.yml
-          kubectl apply -f deployment-solution/manifests/deployment-solution.yml
-          kubectl apply -f deployment-solution/manifests/service-solution.yml
+          kubectl apply -f api-ingress-solution.yml
+          kubectl apply -f deployment-solution.yml
+          kubectl apply -f service-solution.yml
           kubectl get pods
           kubectl get svc
           kubectl get ing 
