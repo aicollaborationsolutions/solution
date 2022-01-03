@@ -44,7 +44,7 @@ jobs:
         uses: azure/k8s-set-context@v2
         with:
           method: kubeconfig
-          kubeconfig: ${{ secrets.AKS_DEV_KUBECONFIG }}
+          kubeconfig: ${{ secrets.KUBECONFIG }}
 
       - name: k8s with helm
         run: |
