@@ -1,4 +1,4 @@
-input{
+input, textarea{
     border: solid 2px #ccc;
     height: 45px;
     padding-left: 10px;

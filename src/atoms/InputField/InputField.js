@@ -1,30 +1,20 @@
 import React from 'react'
 import './InputField.css';
-export default function InputField({ name, type, placeholder, handleInputchange, value, classname, parentclassname, readonly }) {
-    const _placeholder = placeholder || "Enter Value";
-    const _type = type || "text"
-    const _classname = classname || "";
-    const _parentclassname = parentclassname || "inputFieldOrgDetail";
 
-const _readonly = readonly || false;
-
+export default function InputField({ name, placeholder, handleInputChange, value, classname: className, parentclassname: parentClassName, readonly }) {
     return (
-        <>
-            <div className={_parentclassname}>
-                <div className="inputFieldOrgDetailLabel">{_placeholder}</div>
-              
-                    <input
-                        type={_type}
-                        name={name}
-                        className={_classname}
-                        placeholder={_placeholder}
-                        value={value}
-                        onChange={(e) => handleInputchange(e.target.value, name)}
-                        readOnly = {_readonly} 
-                    />
-
-
-            </div>
-        </>
+        <div className={parentClassName || "inputFieldOrgDetail"}>
+            <div className="inputFieldOrgDetailLabel">{placeholder || "Enter Value"}</div>
+            <textarea
+                className={className || ""}
+                name={name}
+                placeholder={placeholder || "Enter Value"}
+                value={value}
+                onChange={(e) => handleInputChange(e.target.value, name)}
+                readOnly={readonly || false}
+                rows="12"
+                style={{ height: 300 }}
+            >{value}</textarea>
+        </div>
     )
 }

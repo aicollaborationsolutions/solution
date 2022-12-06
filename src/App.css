@@ -1,29 +1,32 @@
-
-.form-widget{
-text-align: center;
+.form-widget {
+  text-align: center;
 }
-.card{
+
+.card {
   margin: 15px;
 }
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
-.inputField{
+
+.inputField {
   width: 300px;
-    height: 25px;
-    padding: 5px;
-    margin: 10px;
+  height: 25px;
+  padding: 5px;
+  margin: 10px;
 }
 
-.form-padding{
+.form-padding {
   padding-bottom: 15px;
 }
 
-.form-common-padding{
+.form-common-padding {
   padding: 5px 8px;
 }
-.button{
+
+.button {
   width: 150px;
   height: 45px;
   color: #fff;
@@ -31,16 +34,21 @@ text-align: center;
   background: green;
   border: 0px;
 }
-a{
+
+a {
   text-decoration: none;
   cursor: pointer;
 }
+
 header {
-color:#fff;
+  color: #fff;
 }
-header a, header a button{
-  color:#fff !important;
-  }
+
+header a,
+header a button {
+  color: #fff !important;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -62,14 +70,15 @@ header a, header a button{
   color: #61dafb;
 }
 
-button{
-height: 35px;
+button {
+  height: 35px;
 }
 
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

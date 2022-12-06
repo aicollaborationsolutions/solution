@@ -57,7 +57,7 @@ export default function OpenApi({ session, selectedData }) {
     }
 
 
-    const handleInputchange = (value, name) => {
+    const handleInputChange = (value, name) => {
         console.log(data, "data", value, name);
         const _dat = _.cloneDeep(data);;
         _dat[name] = value;
@@ -77,14 +77,13 @@ export default function OpenApi({ session, selectedData }) {
             responseApi = await dig(api, 'Output');
         }
 
-
         const _inputs = { ...values };
 
         delete _inputs.path;
         delete _inputs.server;
 
-
-        const url = values.server + values.path;
+        //const url = values.server + values.path;
+        const url = 'http://localhost:5080/api/1.0/predict';
 
         const body = {
             ..._inputs
@@ -101,7 +100,6 @@ export default function OpenApi({ session, selectedData }) {
                 body: JSON.stringify(body)
             });
 
-
             const content = await rawResponse.json();
             setAnswer(content);
             console.log(content, "content");
@@ -111,32 +109,27 @@ export default function OpenApi({ session, selectedData }) {
             console.log(err)
             setLoading(false);
         }
-
-
-
     }
-
 
     return (
         <div>
-
             {Object.keys(responseApi).map((item, index) => (
                 <div key={index}>
+
                     <InputField
                         placeholder={responseApi[item] ? responseApi[item].description : ""}
                         name={item}
                         value={data[item] || ""}
-                        handleInputchange={handleInputchange}
+                        handleInputChange={handleInputChange}
                         classname={`w-100-p ${item}`}
                     />
                 </div>
             ))}
-
+{/**
             <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>
-
                     <SelectDropDown
-                        handleInputchange={handleInputchange}
+                        handleInputChange={handleInputChange}
                         name="server"
                         data={serverDropDown}
                         label={"Server"}
@@ -144,16 +137,14 @@ export default function OpenApi({ session, selectedData }) {
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <SelectDropDown
-                        handleInputchange={handleInputchange}
+                        handleInputChange={handleInputChange}
                         name="path"
                         data={pathDropDown}
                         label={"Path"}
                     />
                 </Grid>
-
             </Grid>
-
-
+ */}
             <div className="form-common-padding">
                 {!loading && <Button variant="contained"
                     className="button block" onClick={ask}
@@ -161,12 +152,7 @@ export default function OpenApi({ session, selectedData }) {
                 {loading && <Loading />}
             </div>
 
-
-            {!_.isEmpty(answer) &&
-                <ReactJson src={answer} />}
-
+            {!_.isEmpty(answer) && <ReactJson src={answer} />}
         </div>
     )
 }
-
-

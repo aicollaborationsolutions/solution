@@ -20,19 +20,13 @@ export default function Solutions({ session }) {
     }
 
     async function getSolutionServices() {
-        const solutionId = 57;
         try {
             setLoading(true)
 
-            const query = `
-        id,
-        config,
-        solution(*),
-        service(*)
-        `;
+            const query = `id, config, solution(*), service(*)`;
 
+            const solutionId = 84;
             const { data, error, status } = await supabase.from('solution_services').select(query).eq('solutionId', solutionId);
-
 
             if (error && status !== 406) {
                 throw error
@@ -52,23 +46,23 @@ export default function Solutions({ session }) {
 
     return (
         <>
-         <br/>
-            <br/>
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-           
-            {apiData && apiData.map((item, index) => (
-                <Grid item xs={6} key={index} >
-                    <Link
-                        to={{
-                            pathname: `/SolutionDetail/${item.id}`,
-                            state: { Solution: item.service ? JSON.parse(item.service.api) : {} }
-                        }}
-                    >
-                        <SolutionBox item={item} />
-                    </Link>
-                </Grid>
-            ))}
-        </Grid>
+            <br />
+            <br />
+            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+
+                {apiData && apiData.map((item, index) => (
+                    <Grid item xs={6} key={index} >
+                        <Link
+                            to={{
+                                pathname: `/solution-detail/${item.id}`,
+                                state: { Solution: item }
+                            }}
+                        >
+                            <SolutionBox item={item} />
+                        </Link>
+                    </Grid>
+                ))}
+            </Grid>
         </>
     )
 }
