@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: <solution-repo>
+  name: solution
   labels:
-    app: <solution-repo>
+    app: solution
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: <solution-repo>
+      app: solution
   template:
     metadata:
       labels:
-        app: <solution-repo>
+        app: solution
     spec:
       containers:
-        - name: <solution-repo>
-          image: aicollaboration/<solution-repo>:<VERSION>
+        - name: solution
+          image: aicollaboration/solution:<VERSION>
           imagePullPolicy: Always
           env:
           - name: PYTHONUNBUFFERED
